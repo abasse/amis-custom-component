@@ -1,17 +1,25 @@
+import babel from '@rollup/plugin-babel';
 import commonjs from "@rollup/plugin-commonjs"
+import resolve from '@rollup/plugin-node-resolve';
 
 export default {
   input: "./src/index.js",
   plugins: [
-    commonjs()  
+    resolve(),
+    commonjs(),
+    babel({
+      babelHelpers: 'bundled',
+      extensions: ['.js', '.jsx'],
+      exclude: 'node_modules/**'
+    })
   ],
   output: [
     {
       file: './dist/amiscp.js',
       format: 'umd',
       name: 'amiscp'   
-      //当入口文件有export时，'umd'格式必须指定name
-      //这样，在通过<script>标签引入时，才能通过name访问到export的内容。
+      // When the entry file has exports, the 'umd' format must specify a name.
+      // This way, when importing via <script> tag, you can access the exported content through the name.
     },
     {
       file: './dist/esm/amiscp.js',

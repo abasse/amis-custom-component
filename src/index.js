@@ -3,7 +3,7 @@ export {
   hello
 }
 
-import './renderers/HelloWorld'
+import './renderers/HelloWorld.jsx';
 
 
 
